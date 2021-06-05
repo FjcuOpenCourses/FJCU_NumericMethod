@@ -49,13 +49,13 @@ def initTable():
 
 def caculateNormalDistribute(number: float):
     Xcoodinate: float = float(int(number * 10) / 10)
-    Ycoodinate: float =  float(int(number * 100) % 100) / 100
-    baseX:int=0
-    baseY:int=0
-    while table[baseX+1][0]<=Xcoodinate:
-        baseX+=1
-    while table[0][baseY+1]<=Ycoodinate:
-        baseY+=1
+    Ycoodinate: float = float(int(number * 100) % 100) / 100
+    baseX: int = 0
+    baseY: int = 0
+    while table[baseX + 1][0] <= Xcoodinate:
+        baseX += 1
+    while table[0][baseY + 1] <= Ycoodinate:
+        baseY += 1
     return table[baseX][baseY]
 
 
