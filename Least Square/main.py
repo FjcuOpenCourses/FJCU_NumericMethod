@@ -31,7 +31,7 @@ def caculateLeastSquare(start, end, x, y):
 def printResult(arr: float, x: float, y: float):
 
     minLine = 0
-    minNum = 1e6
+    minNum = 1e9
 
     for i in range(1, 31, 1):
         for j in range(0, 45, 1):
@@ -41,7 +41,6 @@ def printResult(arr: float, x: float, y: float):
             minNum = su
             minLine = i
         xp = np.linspace(min(x), max(x), 100)
-        print("")
         print("the minimum E line is ", str(minLine + 14), "num is ", minNum)
         plt.plot(x, y, '.', xp, arr[i](xp), '-')
         plt.show()
