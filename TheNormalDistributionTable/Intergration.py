@@ -5,8 +5,8 @@ from scipy.integrate import quad
 lowBound = 10
 
 
-# def f(x: float):
-#     return 1.0 / (1.0 + x * x)
+def f(x: float):
+    return 1.0 / (1.0 + x * x)
 
 
 def probabilityDensityFunction(x: float):
