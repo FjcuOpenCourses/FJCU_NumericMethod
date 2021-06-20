@@ -5,11 +5,11 @@ import os
 class interpolation:
 
     def __init__(self):
-        self.table = [[0 for x in range(11)] for y in range(11)]
-        self.delta = [[0 for x in range(11)] for y in range(11)]
-        self.S = [0 for y in range(5)]
-        self.point = [0 for y in range(4)]
-        self.mul = [0 for y in range(12)]
+        self.table = [[0 for _ in range(11)] for _ in range(11)]
+        self.delta = [[0 for _ in range(11)] for _ in range(11)]
+        self.S = [0 for _ in range(5)]
+        self.point = [0 for _ in range(4)]
+        self.mul = [0 for _ in range(12)]
         self.lastTable = []
 
     def Setup(self):
@@ -59,8 +59,8 @@ class interpolation:
     def deltaCal(self, x: float, index: int, method: int):
         self.delta = [[float(-50.0) for index in range(11)] for _ in range(11)]
 
-        for i in range(1, 10, 1):
-            self.delta[1][i]: float = self.table[i + 1][index] - self.table[i][index]
+        for i in range(2, 11, 1):
+            self.delta[1][i]: float = self.table[i][index] - self.table[i-1][index]
 
         for j in range(1, 10, 1):
             for k in range(1, 11 - j, 1):
@@ -194,7 +194,7 @@ class interpolation:
         print("NF's result is ====> ", ans, "\n")
 
     # NewtonBackward and store
-    def NBCalX(self, x, index):
+    def NBCalX(self, x:float, index):
         ans: float = self.table[self.point[1]][index]
         self.SCal(-1, 1)
 

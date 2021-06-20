@@ -9,7 +9,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-def generatingData():
+def generatingData(dir):
     arr1: float = []
     arr2: float = []
     with open(os.path.dirname(os.path.realpath(__file__)) + "\\Hw4.txt") as openfileobject:
@@ -21,7 +21,7 @@ def generatingData():
     return arr1, arr2
 
 
-def caculateLeastSquare(start, end, x, y):
+def caculateLeastSquare(start, end, x: list, y: list):
     arr: float = []
     for i in range(start, end, 1):
         arr.append(np.poly1d(np.polyfit(x, y, i)))
@@ -29,7 +29,6 @@ def caculateLeastSquare(start, end, x, y):
 
 
 def printResult(arr: float, x: float, y: float):
-
     baseLine = 0
     baseValue = 1e9
 
@@ -41,11 +40,15 @@ def printResult(arr: float, x: float, y: float):
             baseValue = index
             baseLine = i
         xp = np.linspace(min(x), max(x), 100)
-        plt.title("Minimum E line:"+str(baseLine + 14)+str(baseValue), fontdict=None, loc='center', pad=None)
+        plt.title("Minimum E line:" + str(baseLine + 14) + str(baseValue), fontdict=None, loc='center', pad=None)
         plt.plot(x, y, '.', xp, arr[i](xp), '-')
         plt.show()
 
 
-x, y = generatingData()
-ans: float = caculateLeastSquare(15, 44, x, y)
-printResult(ans, x, y)
+def main():
+    x, y = generatingData()
+    ans: float = caculateLeastSquare(15, 44, x, y)
+    printResult(ans, x, y)
+
+
+main()

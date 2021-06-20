@@ -21,16 +21,13 @@ import math
 
 from scipy.integrate import quad
 
+from TheNormalDistributionTable.Intergration import intergration
+
 upBound: int = int(1e3)
-from TheNormalDistributionTable.Intergration import trapezoidalRule, simpson13Rule, simpson38Rule, \
-    conditionalProbability
 
 
 def probabilityDensityFunction(x: float):
     return (1 / math.sqrt(2 * math.pi)) * math.exp(-1 * (x * x) / 2)
-
-
-
 
 
 def initTable(intergrateMethod, f):
@@ -46,7 +43,7 @@ def initTable(intergrateMethod, f):
 
     for i in range(1, 55, 1):
         for j in range(1, 101, 1):
-            table[i][j] = 0.5 + intergrateMethod(0.0, table[i][0] + table[0][j], int(upBound), f)
+            table[i][j] = 0.5 + intergrateMethod(0.0, table[i][0] + table[0][j], f)
     return table
 
 
@@ -62,14 +59,19 @@ def caculateNormalDistribute(number: float, table: float):
     return table[baseX][baseY]
 
 
-trapTable: float = initTable(trapezoidalRule, probabilityDensityFunction)
-simpson13Table: float = initTable(simpson13Rule, probabilityDensityFunction)
-simpson38Table: float = initTable(simpson38Rule, probabilityDensityFunction)
-specialSquadTable: float = initTable(conditionalProbability, probabilityDensityFunction)
-while True:
-    X = input("Enter X: ")
+def main():
+    HW3 = intergration()
+    trapTable: float = initTable(HW3.trapezoidalRule, probabilityDensityFunction)
+    simpson13Table: float = initTable(HW3.simpson13Rule, probabilityDensityFunction)
+    simpson38Table: float = initTable(HW3.simpson38Rule, probabilityDensityFunction)
+    specialSquadTable: float = initTable(HW3.conditionalProbability, probabilityDensityFunction)
+    while True:
+        X = input("Enter X: ")
 
-    print("P( z <", X, ")=", caculateNormalDistribute(float(X),trapTable), "with trapRule\n")
-    print("P( z <", X, ")=", caculateNormalDistribute(float(X),simpson13Table), "with simpson1/3Rule\n")
-    print("P( z <", X, ")=", caculateNormalDistribute(float(X),simpson38Table), "with simpson3/8Rule\n")
-    print("P( z <", X, ")=", caculateNormalDistribute(float(X),specialSquadTable), "with squadRule\n")
+        print("P( z <", X, ")=", caculateNormalDistribute(float(X), trapTable), "with trapRule\n")
+        print("P( z <", X, ")=", caculateNormalDistribute(float(X), simpson13Table), "with simpson1/3Rule\n")
+        print("P( z <", X, ")=", caculateNormalDistribute(float(X), simpson38Table), "with simpson3/8Rule\n")
+        print("P( z <", X, ")=", caculateNormalDistribute(float(X), specialSquadTable), "with squadRule\n")
+
+
+main()
